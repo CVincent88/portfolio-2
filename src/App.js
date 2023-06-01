@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import styled from "styled-components";
+
+import MenuButton from "./components/MenuButton";
+import Menu from "./components/Menu";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+
+const Wrapper = styled.div`
+   background-color: #f9f9f9;
+`;
+
+const Container = styled.div`
+   position: relative;
+`;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+   const toggleMenu = () => {
+      setIsMenuVisible((prevState) => !prevState);
+   };
+
+   return (
+      <Wrapper className="App">
+         <Container>
+            <MenuButton onClick={toggleMenu} isMenuVisible={isMenuVisible} />
+            <Menu menuVisible={isMenuVisible} toggleMenu={toggleMenu} />
+            <About />
+            <Skills />
+            <Projects />
+            <Contact />
+         </Container>
+      </Wrapper>
+   );
 }
 
 export default App;
